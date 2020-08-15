@@ -1,11 +1,34 @@
 .question-div {
+    max-width: 480px;
+    height: auto;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    margin: 0 auto;
     margin-top: 40px;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    width: 50%;
-    border: 1px solid black;
+}
+.question-ans-div button{
+    width: 80%;
+    height: 40px;
+    background-color: #18b0b0;
+    border: none;
+    margin-top: 15px;
+}
+.question-ans-div button:hover{
+    background-color: #142850;
+    color: white;
+}
+.question-ans-div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.question-ans-div button span{
+    font-size: 16px;
+}
+.question-div-q p{
+    font-size: 24px;
+    font-weight: 700;
+}
+.question-div-q{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

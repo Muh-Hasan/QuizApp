@@ -29,23 +29,24 @@
 
 .heading {
     flex-grow: 1;
+    display: flex;
     text-align: left;
 }
-.head-timer h4{
-    font-weight: 700;
-    font-size: 18px;
-    margin-top: 5px;
+.heading img{
+    height: 50px;
+    width: 50px;
 }
-.head-timer{
-    width: 55px;
-    height: 30px;
-    border: 1px solid black;
-}
+
 /* head-flex */
 .head-flex{
     display: flex;
     flex-wrap: wrap;
-    /* margin-top: 30px; */
+    padding-top: 30px;
+}
+.cate h4{
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
 }
 
 /* category */
@@ -73,7 +74,6 @@
 .option-category img {
     height: 80px;
     width: 80px;
-    border-radius: 50%;
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -90,13 +90,13 @@
 
 
 .option-category div {
-    border: 1px solid black;
     margin-right: 10px;
     height: 180px;
     width: 150px;
     cursor: pointer;
-    box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 10px grey;
     margin-bottom: 20px;
+    background-color: #89c9b8;
 }
 
 
@@ -112,11 +112,12 @@
 .option-difficulty button {
     margin-right: 20px;
     padding: 20px 80px;
+    margin-bottom: 10px;
     border: none;
-    outline: none;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
+    background-color: #84a9ac;
 }
 
 
@@ -125,13 +126,12 @@
 .start-quiz button {
     cursor: pointer;
     padding: 10px 50px;
-    border-radius: 50px;
     outline: none;
     font-size: 18px;
     font-weight: 700;
     border: none;
     letter-spacing: 2px;
-    background-color: #16AA72;
+    background-color: #86c4ba;
 }
 
 .start-quiz {
@@ -152,4 +152,27 @@
 .loading-center h6 {
     font-size: 16px;
     margin-top: 10px;
+}
+
+body{
+    background-color: #f7f2e7;
+}
+
+.score p{
+    font-size: 24px;
+    font-weight: 800;
+}
+.score{
+    margin-top: 20px;
+}
+.next{
+    margin-top: 20px;
+}
+.next button{
+    padding: 10px 40px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1px;
+    background-color: #86c4ba;
+    border : none;
 }

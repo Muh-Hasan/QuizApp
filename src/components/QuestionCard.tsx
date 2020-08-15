@@ -18,27 +18,25 @@ const QuestionCard: React.FC<Props> = ({
   callback,
   userAnswer,
   totalQuestion,
-  answers
+  answers,
 }) => {
   const AnswerDisplay = answers.map(answer => {
-    return(
-    <div key={answer}>
-      <button disabled={userAnswer ? true : false} value={answer} onClick={callback}>
-        <span dangerouslySetInnerHTML={{ __html: answer }} />
-      </button>
-    </div>
-  )})
+    return (
+      <div key={answer}>
+        <button key={answer} disabled={userAnswer ? true : false} value={answer} onClick={callback} >
+          <span dangerouslySetInnerHTML={{ __html: answer }} />
+        </button>
+      </div>
+    )
+  })
   return (
     <div className='question-div'>
-      <div>
-        <h2>
-          Question {questionNo} / {totalQuestion}
-        </h2>
+      <div className='question-div-q'>
+        <p dangerouslySetInnerHTML={{ __html: `${questionNo}. ${question}` }} />
       </div>
-      <div>
-        <p dangerouslySetInnerHTML={{ __html: question }} />
+      <div className='question-ans-div'>
+        {AnswerDisplay}
       </div>
-      {AnswerDisplay}
     </div>
   );
 };

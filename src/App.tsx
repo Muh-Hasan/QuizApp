@@ -4,13 +4,13 @@ import "./styles.css";
 import QuestionCard from "./components/QuestionCard";
 import Loading from './components/loading'
 // images
-import brain from './assets/brain.jpg'
+import brain from './assets/brain.png'
 import computer from './assets/computer.png'
 import history from './assets/history.png'
 import music from './assets/music.png'
 import science from './assets/science.png'
-import sport from './assets/sports.jpg'
-
+import sport from './assets/sports.png'
+import quiz from './assets/quiz.png'
 // api and type
 import { fetchQuestion, QuestionsState } from './Api'
 
@@ -21,16 +21,15 @@ export type AnswersObject = {
   correctAnswer: string
 }
 
-
 export default function App() {
 
-  let interval: NodeJS.Timeout;
+  // let time: any;
 
   const totalQuestion = 10
   // setting states 
   const [loading, setloading] = useState(false)
   const [question, setquestion] = useState<QuestionsState[]>([])
-  let [number, setnumber] = useState(0)
+  var [number, setnumber] = useState(0)
   const [userAnswer, setAnswer] = useState<AnswersObject[]>([])
   const [score, setscore] = useState(0)
   const [gameOver, setgameOver] = useState(true)
@@ -38,17 +37,17 @@ export default function App() {
   // options
   const [diff, setdiff] = useState('easy')
   const [category, setCategory] = useState('9')
-
+  let [categoryname , setCategoryname] = useState('General Knowledge')
   // timer 
-  let [min, setmin] = useState(0)
-  let [sec, setsec] = useState(0)
+  // let [min, setmin] = useState(0)
+  // let [sec, setsec] = useState(0)
 
   // funtions
 
   // start
   const startQuiz = async () => {
-    setloading(true)
     setgameOver(false)
+    setloading(true)
 
     const newQuestion = await fetchQuestion(totalQuestion, diff, category)
     setquestion(newQuestion)
@@ -56,7 +55,7 @@ export default function App() {
     setAnswer([])
     setnumber(0)
     setloading(false)
-    interval = setInterval(timer, 1000);
+    // time = setInterval(timer, 1000);
   }
 
   // checking answers 
@@ -84,22 +83,30 @@ export default function App() {
     if (next === totalQuestion) {
       setgameOver(true)
     } else {
-      setnumber(number = next)
+      setnumber(next)
     }
-
   };
 
-  // timer
-  function timer() {
-    setsec(sec++)
-    if (sec === 60) {
-      setmin(min++)
-      setsec(sec = 0)
-    } else if (min === 1) {
-      clearInterval(interval)
-      setgameOver(true)
-    }
-  }
+  // // // timer
+  // function timer() {
+  //   setsec(sec++)
+  //   if (sec === 60) {
+  //     setmin(min++)
+  //     setsec(sec = 0)
+  //   }
+
+  // }
+  // // useEffect(() => {
+  //   if (number === 9) {
+  //     console.log('hello')
+  //     clearInterval(time)
+  //     setsec(sec = 0)
+  //     setmin(min = 0)
+  //   } else if (min === 1) {
+  //     clearInterval(time)
+  //   }
+  // // } , [])
+
 
   // difficulty 
   const getDifficulty = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -108,6 +115,22 @@ export default function App() {
   // category
   const getCategory = (e: React.MouseEvent<HTMLDivElement>) => {
     setCategory(e.currentTarget.title)
+    cate()
+  }
+  function cate(){
+    if (category === '9'){
+      setCategoryname(categoryname = 'General Knowledge')
+    }else if(category === '12'){
+      setCategoryname(categoryname = 'Music')
+    }else if(category === '17'){
+      setCategoryname(categoryname = 'Science And Nature')
+    }else if (category === '18'){
+      setCategoryname(categoryname = 'Computer')
+    }else if(category === '21'){
+      setCategoryname(categoryname = 'Sports')
+    }else{
+      setCategoryname(categoryname = 'History')
+    }
   }
 
   return (
@@ -117,11 +140,12 @@ export default function App() {
       <div className='main-div container'>
         <div className='head-flex'>
           <div className='heading'>
+            <img src={quiz} alt='qiz' />
             <h1>Quiz App</h1>
           </div>
-          {!loading && !gameOver && (<div className='head-timer'>
-            <h4>{min} : {sec}</h4>
-          </div>)}
+          <div className='cate'>
+            <h4>{categoryname}({diff})</h4>
+          </div>
         </div>
         {gameOver || userAnswer.length === totalQuestion ? (
           <>
@@ -129,7 +153,7 @@ export default function App() {
               <h4>Category</h4>
             </div>
             <div className='option-category'>
-              <div onClick={getCategory} title='9' className='hello'>
+              <div onClick={getCategory} title='9'>
                 <img src={brain} alt='brain' />
                 <h6>General Knowledge</h6>
               </div>
@@ -171,7 +195,11 @@ export default function App() {
           </>
         ) : null}
 
-        {!gameOver ? <p>Socre : {score}</p> : null}
+        {!gameOver && !loading ?
+          <div className='score'>
+            <p>Socre : {score} / 10</p>
+          </div>
+          : null}
 
         <div className='loading-api'>
           {loading && <Loading />}
@@ -191,7 +219,7 @@ export default function App() {
         )}
 
         {!gameOver && !loading && userAnswer.length === number + 1 && number !== totalQuestion - 1 ? (
-          <div>
+          <div className='next'>
             <button onClick={nextQuestion}>Next Question</button>
           </div>
         ) : null}
