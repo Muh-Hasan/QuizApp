@@ -1,4 +1,5 @@
 import React from "react";
+import './Question.css'
 // types
 import { AnswersObject } from '../App'
 
@@ -28,7 +29,7 @@ const QuestionCard: React.FC<Props> = ({
     </div>
   )})
   return (
-    <div>
+    <div className='question-div'>
       <div>
         <h2>
           Question {questionNo} / {totalQuestion}
